@@ -77,7 +77,7 @@ public:
 	void make_coding_table(void); 
 	NCS& operator=(NCS& other);
 	//NCS& operator=(const NCS& other);
-	string calc_code(string pattern_1, string pattern_2);
+	string calc_code(const string& pattern_1, const string& pattern_2);
 	bool check_power(string new_pattern,int min_depth);
 };
 

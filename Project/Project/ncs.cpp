@@ -160,15 +160,25 @@ bool NCS::check_power(string new_pattern, int min_power) {
 	return (power >= min_power); 
 }
 
-string NCS::calc_code(string pattern_1, string pattern_2) {
-	string value = "";
-	char s1, s2; 
-	for (int i = 0; i < pattern_1.size(); i++) {
-		s1 = pattern_1[i]; 
-		s2 = pattern_2[i];
-		value.push_back(codes_dict[label_dict[s1]][label_dict[s2]][0]); //
-	}
-	return value; 
+string NCS::calc_code(const string& pattern_1, const string& pattern_2) {
+        static map<tuple<string, string>,string> map_of_codes;
+	tuple<string, string> pattern_tuple;
+	pattern_tuple = tuple<string, string>(pattern_1, pattern_2);
+        map<tuple<string, string>, string>::iterator find_result = 
+           map_of_codes.find(pattern_tuple);
+	if(find_result != map_of_codes.end()){
+	   return find_result->second;
+	}else{
+	   string value = "";
+	  char s1, s2; 
+	   for (int i = 0; i < pattern_1.size(); i++) {
+		  s1 = pattern_1[i]; 
+		  s2 = pattern_2[i];
+		  value.push_back(codes_dict[label_dict[s1]][label_dict[s2]][0]); //
+	   }
+           map_of_codes[pattern_tuple] = value;
+	   return value; 
+        }
 }
 
 string simplify_pattern(string pattern) { 
