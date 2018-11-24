@@ -1,4 +1,7 @@
 #pragma once
+#ifndef SCHEME_H_INCLUDED
+#define SCHEME_H_INCLUDED
+
 #include"ncs.h"
 class Scheme {
 public:
@@ -25,3 +28,5 @@ public:
 };
 bool operator==(const Scheme& s1, const Scheme& t2);
 bool operator<(const Scheme& t1, const Scheme& t2);
+
+#endif // SCHEME_H_INCLUDED
